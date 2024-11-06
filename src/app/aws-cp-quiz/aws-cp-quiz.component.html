@@ -1,0 +1,31 @@
+<div class="list-group m-3">
+    <h5 class="text-start">{{ currentQuestion["question"] }}</h5>
+    <button
+        type="button"
+        class="list-group-item list-group-item-action"
+        data-bs-toggle="button"
+        [disabled]="isOptionLocked"
+        *ngFor='let option of currentQuestion.options'
+        (click)="onOptionClick($event, option[0])">
+        {{option}}
+    </button>
+    <h1 class="text-start" [hidden]="!isOptionLocked">{{ currentQuestion["answer"] }}</h1>
+    <p class="text-start" [hidden]="!isOptionLocked">{{ currentQuestion["explanation"] }}</p>
+</div>
+<button
+    class="btn btn-primary m-3"
+    type="button"
+    [hidden]="!isOptionLocked"
+    (keyup.enter)="onNextClick($event)"
+    (keyup.space)="onNextClick($event)"
+    (click)="onNextClick($event)">
+    Next Question
+</button>
+<div class="fixed-bottom row align-items-end">
+    <div class="bg-success-subtle col">
+        <h2 class="">{{ count_correct }}</h2>
+    </div>
+    <div class="bg-danger-subtle col">
+        <h2 class="">{{ count_wrong }}</h2>
+    </div>
+  </div>
